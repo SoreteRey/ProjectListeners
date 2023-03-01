@@ -40,12 +40,12 @@ struct MealService {
         guard let baseURL = URL(string: Constants.MealService.mealsInCategoryBaseURL) else { completion(.failure(.invalidURL))
             return
         }
-            var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
-            let categoryQueryItem = URLQueryItem(name: Constants.MealService.categoryQueryKey, value: category.categoryName)
+        var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
+        let categoryQueryItem = URLQueryItem(name: Constants.MealService.categoryQueryKey, value: category.categoryName)
         urlComponents?.queryItems = [categoryQueryItem]
         guard let finalURL = urlComponents?.url else { completion(.failure(.invalidURL)) ; return }
         print("Fetch Meals in Category Final URL: \(finalURL)")
-            
+        
         URLSession.shared.dataTask(with: finalURL) { data, response, error in
             if let error = error {
                 completion(.failure(.thrownError(error)))
@@ -68,5 +68,42 @@ struct MealService {
             }
         }.resume()
     }
+        
+        static func fetchRecipe(forMeal meal: Meal,
+                                completion: @escaping (Result<Recipe, NetworkError>) -> Void) {
+            
+            guard let baseURL = URL(string: Constants.MealService.fetchRecipeBaseURL) else { completion(.failure(.invalidURL)) ; return }
+            var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
+            let recipeQueryItem = URLQueryItem(name: Constants.MealService.recipeQueryKey, value: meal.mealName)
+            urlComponents?.queryItems = [recipeQueryItem]
+            guard let finalURL = urlComponents?.url else { completion(.failure(.invalidURL)) ; return }
+            print("Fetch Recipe Final URL: \(finalURL)")
+            
+            URLSession.shared.dataTask(with: finalURL) { data, response, error in
+                if let error = error {
+                    completion(.failure(.thrownError(error)))
+                    return
+                }
+                
+                if let response = response as? HTTPURLResponse {
+                    print("Fetch Recipe Status Code; \(response.statusCode)")
+                }
+                
+                guard let data = data else { completion(.failure(.noData)) ; return }
+                
+                do {
+                    let topLevel = try JSONDecoder().decode(RecipeTopLevelDictionary.self, from: data)
+                    if let recipe = topLevel.meals.first {
+                        completion(.success(recipe))
+                    } else {
+                        completion(.failure(.emptyArray))
+                        return
+                    }
+                } catch {
+                    completion(.failure(.unableToDecode))
+                    return
+                }
+            }.resume()
+        }
 }// end of struct
 

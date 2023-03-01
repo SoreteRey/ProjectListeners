@@ -13,6 +13,7 @@ enum NetworkError: LocalizedError {
     case thrownError(Error)
     case noData
     case unableToDecode
+    case emptyArray
     
     var errorDescription: String? {
         switch self {
@@ -24,6 +25,8 @@ enum NetworkError: LocalizedError {
             return "No data received from successful network fetch."
         case .unableToDecode:
             return "Unable to decode model object from data."
+        case .emptyArray:
+            return "Recipe Array from Recipes is empty!!!"
         }
     }
 }
