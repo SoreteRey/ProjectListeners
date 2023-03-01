@@ -11,7 +11,8 @@ struct Constants {
     
     struct MealService {
         static let allCategoriesBaseURl = "www.themealdb.com/api/json/v1/1/categories.php"
-       
+        static let mealsInCategoryBaseURL = "www.themealdb.com/api/json/v1/1/filter.php"
+        static let categoryQueryKey = "c"
         }
     }
 
