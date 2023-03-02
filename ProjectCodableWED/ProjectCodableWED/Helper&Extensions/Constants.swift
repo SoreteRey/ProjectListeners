@@ -13,7 +13,7 @@ struct Constants {
         static let allCategoriesBaseURl = "https://www.themealdb.com/api/json/v1/1/categories.php"
         static let mealsInCategoryBaseURL = "https://www.themealdb.com/api/json/v1/1/filter.php"
         static let categoryQueryKey = "c"
-        static let fetchRecipeBaseURL = "https://www.themealdb.com/api/json/v1/1/random.php"
+        static let fetchRecipeBaseURL = "https://www.themealdb.com/api/json/v1/1/lookup.php"
         static let recipeQueryKey = "i"
         }
     

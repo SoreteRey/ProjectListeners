@@ -5,7 +5,7 @@
 //  Created by Sebastian Guiscardo on 3/1/23.
 //
 
-import Foundation
+import UIKit
 
 struct MealService {
     
@@ -74,7 +74,7 @@ struct MealService {
             
             guard let baseURL = URL(string: Constants.MealService.fetchRecipeBaseURL) else { completion(.failure(.invalidURL)) ; return }
             var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
-            let recipeQueryItem = URLQueryItem(name: Constants.MealService.recipeQueryKey, value: meal.mealName)
+            let recipeQueryItem = URLQueryItem(name: Constants.MealService.recipeQueryKey, value: meal.mealID)
             urlComponents?.queryItems = [recipeQueryItem]
             guard let finalURL = urlComponents?.url else { completion(.failure(.invalidURL)) ; return }
             print("Fetch Recipe Final URL: \(finalURL)")
@@ -89,7 +89,7 @@ struct MealService {
                     print("Fetch Recipe Status Code; \(response.statusCode)")
                 }
                 
-                guard let data = data else { completion(.failure(.noData)) ; return }
+                guard let data = data, !data.isEmpty else { completion(.failure(.noData)) ; return }
                 
                 do {
                     let topLevel = try JSONDecoder().decode(RecipeTopLevelDictionary.self, from: data)
@@ -105,5 +105,31 @@ struct MealService {
                 }
             }.resume()
         }
+        
+    static func fetchImage(for item: String?,
+                           completion: @escaping (Result<UIImage, NetworkError>) -> Void) {
+       
+        guard let item = item else { completion(.success(UIImage(named: "image1")!)) ; return }
+        
+        guard let finalURL = URL(string: item) else { completion(.failure(.invalidURL)) ; return }
+        print("Image Fetch Final URL: \(finalURL)")
+        
+        URLSession.shared.dataTask(with: finalURL) { data, response, error in
+            if let error = error {
+                completion(.failure(.thrownError(error)))
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse,
+                  (200...299).contains(response.statusCode) else { completion(.failure(.invalidStatusCode))
+                return
+            }
+            
+            guard let data = data, !data.isEmpty else { completion(.failure(.noData)) ; return }
+            
+            guard let image = UIImage(data: data) else { completion(.failure(.unableToDecode)) ; return }
+            completion(.success(image))
+        }.resume()
+    }
 }// end of struct
 

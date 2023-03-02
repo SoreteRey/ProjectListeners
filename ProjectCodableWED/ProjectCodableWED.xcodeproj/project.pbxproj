@@ -20,6 +20,8 @@
 		9380E12D29AFEC0400B9D533 /* CategoryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9380E12C29AFEC0400B9D533 /* CategoryListTableViewController.swift */; };
 		9380E12F29AFEC1300B9D533 /* MealListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9380E12E29AFEC1300B9D533 /* MealListTableViewController.swift */; };
 		9380E13129AFFAD200B9D533 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9380E13029AFFAD200B9D533 /* Recipe.swift */; };
+		9380E15329B145F600B9D533 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9380E15229B145F600B9D533 /* RecipeViewController.swift */; };
+		9380E15529B1460400B9D533 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9380E15429B1460400B9D533 /* InstructionsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		9380E12C29AFEC0400B9D533 /* CategoryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListTableViewController.swift; sourceTree = "<group>"; };
 		9380E12E29AFEC1300B9D533 /* MealListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealListTableViewController.swift; sourceTree = "<group>"; };
 		9380E13029AFFAD200B9D533 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		9380E15229B145F600B9D533 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
+		9380E15429B1460400B9D533 /* InstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,8 @@
 			children = (
 				9380E12C29AFEC0400B9D533 /* CategoryListTableViewController.swift */,
 				9380E12E29AFEC1300B9D533 /* MealListTableViewController.swift */,
+				9380E15229B145F600B9D533 /* RecipeViewController.swift */,
+				9380E15429B1460400B9D533 /* InstructionsViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -212,6 +218,8 @@
 				9380E10729AFCED900B9D533 /* AppDelegate.swift in Sources */,
 				9380E11F29AFD82400B9D533 /* Category.swift in Sources */,
 				9380E12729AFDD3200B9D533 /* NetworkError.swift in Sources */,
+				9380E15329B145F600B9D533 /* RecipeViewController.swift in Sources */,
+				9380E15529B1460400B9D533 /* InstructionsViewController.swift in Sources */,
 				9380E12A29AFDEAA00B9D533 /* Constants.swift in Sources */,
 				9380E12429AFDC3700B9D533 /* MealService.swift in Sources */,
 				9380E10929AFCED900B9D533 /* SceneDelegate.swift in Sources */,
